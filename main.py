@@ -302,7 +302,10 @@ if __name__ == '__main__':
         gen = gen[0:-R , 0:-C , :]
         img = img[0:-R , 0:-C , :]
         
-        Image.fromarray(gen).save("test_"+str(scale)+"x_gen_.png")
+        if not os.path.isdir('results'):
+            os.makedirs('results')
+        Image.fromarray(gen).save("results/test_"+str(scale)+"x_gen_.png")
+
         
         if zoom:
            z , r , c = DATA.patchify(img , scale = scale)
