@@ -59,6 +59,8 @@ class DATA:
             np.save('training_patches_Y.npy'  , self.training_patches_Y )
             if self.patch_size == 64:
                 np.save('training_patches_2x.npy' , self.training_patches_2x) 
+            elif self.patch_size == 96:
+                np.save('training_patches_3x.npy' , self.training_patches_3x) 
             elif self.patch_size == 128:
                 np.save('training_patches_4x.npy' , self.training_patches_4x) 
             elif self.patch_size == 256:
@@ -71,6 +73,8 @@ class DATA:
             self.training_patches_Y  = np.load( folder+'/'+'training_patches_Y.npy') 
             if self.patch_size == 64:
                 self.training_patches_2x = np.load( folder+'/'+'training_patches_2x.npy') 
+            elif self.patch_size == 96:
+                self.training_patches_3x = np.load( folder+'/'+'training_patches_3x.npy') 
             elif self.patch_size == 128:
                 self.training_patches_4x = np.load( folder+'/'+'training_patches_4x.npy') 
             elif self.patch_size == 256:
@@ -109,9 +113,11 @@ class DATA:
             self.train_noisy_data_list = train_noisy_data_list
             self.training_patches_Y=[]
             self.training_patches_2x=[]
+            self.training_patches_3x=[]
             self.training_patches_4x=[]
             self.training_patches_8x=[]
             self.training_noisy_patches_2x=[]
+            self.training_noisy_patches_3x=[]
             self.training_noisy_patches_4x=[]
             self.training_noisy_patches_8x=[]
             for i in range(len(train_data_list)):
@@ -120,6 +126,8 @@ class DATA:
                 self.training_patches_Y  += self.patchify(img)[0]
                 if self.patch_size == 64:
                     self.training_patches_2x += self.patchify(cv2.resize(img , (int(img.shape[1]/2),int(img.shape[0]/2)) ,interpolation=cv2.INTER_LINEAR) , scale=2)[0]
+                elif self.patch_size == 96:
+                    self.training_patches_3x += self.patchify(cv2.resize(img , (int(img.shape[1]/3),int(img.shape[0]/3)) ,interpolation=cv2.INTER_LINEAR) , scale=3)[0]
                 elif self.patch_size == 128:
                     self.training_patches_4x += self.patchify(cv2.resize(img , (int(img.shape[1]/4),int(img.shape[0]/4)) ,interpolation=cv2.INTER_LINEAR) , scale=4)[0]
                 elif self.patch_size == 256:
@@ -130,6 +138,8 @@ class DATA:
             self.training_patches_Y = np.array(self.training_patches_Y,np.uint8)
             if self.patch_size == 64:
                 self.training_patches_2x = np.array(self.training_patches_2x,np.uint8)
+            elif self.patch_size == 96:
+                self.training_patches_3x = np.array(self.training_patches_3x,np.uint8)
             elif self.patch_size == 128:
                 self.training_patches_4x = np.array(self.training_patches_4x,np.uint8)
             elif self.patch_size == 256:
@@ -141,7 +151,7 @@ class DATA:
 if __name__ == "__main__":
     import time
     s = time.time()
-    d = DATA(folder='./BSDS200_Padded') ## Call for constructing the Object. Give the root directory where it can find the
+    d = DATA(folder='../dataset/testing_lr_images') ## Call for constructing the Object. Give the root directory where it can find the
     # images. It will walk and find everything
     d.construct_list() # only when you need to create everything a new
     print('amount of data:' , d.training_patches_Y.shape)

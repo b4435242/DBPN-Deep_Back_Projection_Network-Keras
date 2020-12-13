@@ -39,7 +39,7 @@ parser.add_argument('--gpu', action="store",dest="gpu", default=-1)
 parser.add_argument('--chk',action="store",dest="chk",default=-1)
 parser.add_argument('--sample',action='store',dest="sample",default=16368)
 # parser.add_argument('--test_sample', action="store",dest="test_sample",default=190)
-# parser.add_argument('--scale', action='store' , dest = 'scale' , default = 8)
+parser.add_argument('--scale', action='store' , dest = 'scale' , default = 8)
 parser.add_argument('--data', action='store' , dest = 'folder' , default = '../Data_8x')
 parser.add_argument('--test_image', action = 'store' , dest = 'test_image' , default = 'test.png')
 parser.add_argument('--test_only' , action = 'store', dest = 'test_only' , default = False)
@@ -56,8 +56,8 @@ tryout = int(values.tryout)
 gpu=int(values.gpu)
 sample = int(values.sample)
 # test_sample = int(values.test_sample)
-# scale = int(values.scale)
-scale = 8
+scale = int(values.scale)
+#scale = 8
 folder = values.folder
 test_only = values.test_only
 zoom = values.zoom
@@ -248,6 +248,8 @@ if __name__ == '__main__':
         DATA.load_data(folder=folder)
         if scale == 2:
             x = DATA.training_patches_2x
+        elif scale == 3:
+            x = DATA.training_patches_3x
         elif scale == 4:
             x = DATA.training_patches_4x
         elif scale == 8:
