@@ -240,12 +240,12 @@ if __name__ == '__main__':
 
     CHANNEL = 3
 
-    DATA = DATA(folder = folder , patch_size = int(scale * 32))
+    DATA = DATA(folder=folder, patch_size=int(scale * 32))
 
     out_patch_size =  DATA.patch_size 
     inp_patch_size = int(out_patch_size/ scale)
     if not test_only:
-        DATA.load_data(folder=folder)
+        DATA.load_data()
         if scale == 2:
             x = DATA.training_patches_2x
         elif scale == 3:
@@ -256,7 +256,7 @@ if __name__ == '__main__':
             x = DATA.training_patches_8x
         y = DATA.training_patches_Y
     
-    net = DBN(lr = learning_rate,scale = scale , chk = chk )
+    net = DBN(lr=learning_rate, scale=scale, chk=chk)
     if not test_only:
         net.visualize()
         net.get_model().summary()
