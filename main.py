@@ -232,7 +232,7 @@ class DBN:
     def fit(self , X , Y ,batch_size=16 , epoch = 1000 ):
             # with tf.device('/gpu:'+str(gpu)):
             zero = np.zeros(Y.shape[0])    
-            hist = self.model.fit(x = X, y = Y , batch_size = batch_size , verbose =1 , nb_epoch=epoch)
+            hist = self.model.fit(x=X, y=Y, batch_size=batch_size, verbose=1, epochs=epoch)
             return hist.history
     
 
