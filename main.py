@@ -218,8 +218,8 @@ class DBN:
 
             ## multi gpu setting
             
-            if gpu < 0:
-               self.model = multi_gpu_model(self.model, gpus=2)
+            #if gpu < 0:
+            #   self.model = multi_gpu_model(self.model, gpus=2)
 
             adam = Adam(lr=lr, beta_1=0.9, beta_2=0.999, epsilon=None)
             self.model.compile(loss='mse', optimizer=adam , metrics=[PSNRLoss,SSIM])
