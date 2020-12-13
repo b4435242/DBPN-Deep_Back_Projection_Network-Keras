@@ -82,7 +82,7 @@ class DATA:
             # self.training_noisy_patches_2x = np.load( folder+'/'+'training_noisy_patches_2x.npy')
             # self.training_noisy_patches_4x = np.load( folder+'/'+'training_noisy_patches_4x.npy')
             # self.training_noisy_patches_8x = np.load( folder+'/'+'training_noisy_patches_8x.npy')
-            print(folder , " extreacted in !!")
+            print(self.folder , " extreacted in !!")
     
     def construct_list(self ):
             train_data_list = []
