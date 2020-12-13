@@ -138,15 +138,15 @@ class DBN:
         L = Conv2D(filters=channel , kernel_size = 1 , strides=1,kernel_initializer='glorot_uniform' ,padding='valid' )(L)
         L = PReLU(alpha_initializer='zero' , shared_axes=[1, 2 ])(L)
 
-        Ht = Conv2DTranspose(filters=channel , kernel_size=filters  , strides=(8,8) ,  kernel_initializer='glorot_uniform' ,padding='same')(L)
+        Ht = Conv2DTranspose(filters=channel , kernel_size=filters  , strides=(3,3) ,  kernel_initializer='glorot_uniform' ,padding='same')(L)
         Ht = PReLU(alpha_initializer='zero' , shared_axes=[1, 2 ])(Ht)
         
-        Lt = Conv2D(filters= channel , kernel_size=filters, strides=(8 , 8) , kernel_initializer='glorot_uniform' , padding='same')(Ht)
+        Lt = Conv2D(filters= channel , kernel_size=filters, strides=(3,3) , kernel_initializer='glorot_uniform' , padding='same')(Ht)
         Lt = PReLU(alpha_initializer='zero' , shared_axes=[1, 2 ])(Lt)
         
         et = Subtract()([Lt ,L])
 
-        H1t = Conv2DTranspose(filters=channel , kernel_size=filters  , strides=(8,8) ,  kernel_initializer='glorot_uniform' ,padding='same')(et)
+        H1t = Conv2DTranspose(filters=channel , kernel_size=filters  , strides=(3,3) ,  kernel_initializer='glorot_uniform' ,padding='same')(et)
         H1t = PReLU(alpha_initializer='zero' , shared_axes=[1, 2 ])(H1t)
         om = Add()([Ht,H1t])
 
@@ -157,15 +157,15 @@ class DBN:
     	H = Conv2D(filters=channel , kernel_size = 1 , strides=1,kernel_initializer='glorot_uniform' ,padding='same' )(H)
     	H = PReLU(alpha_initializer='zero' , shared_axes=[1, 2 ])(H)
 
-    	Lt = Conv2D(filters= channel , kernel_size=filters, strides=(8 , 8) , kernel_initializer='glorot_uniform' , padding='same')(H)
+    	Lt = Conv2D(filters= channel , kernel_size=filters, strides=(3,3) , kernel_initializer='glorot_uniform' , padding='same')(H)
     	Lt = PReLU(alpha_initializer='zero' , shared_axes=[1, 2 ])(Lt)
     	
-    	Ht = Conv2DTranspose(filters=channel , kernel_size=filters  , strides=(8,8) ,  kernel_initializer='glorot_uniform' ,padding='same')(Lt)
+    	Ht = Conv2DTranspose(filters=channel , kernel_size=filters  , strides=(3,3) ,  kernel_initializer='glorot_uniform' ,padding='same')(Lt)
     	Ht = PReLU(alpha_initializer='zero' , shared_axes=[1, 2 ])(Ht)
 
     	et = Subtract()([Ht,H])
 
-    	L1t = Conv2D(filters= channel , kernel_size=filters , strides=(8 , 8) , kernel_initializer='glorot_uniform' , padding='same')(et)
+    	L1t = Conv2D(filters= channel , kernel_size=filters , strides=(3,3) , kernel_initializer='glorot_uniform' , padding='same')(et)
     	L1t = PReLU(alpha_initializer='zero' , shared_axes=[1, 2 ])(L1t)
 
     	om = Add()([Lt , L1t])
@@ -178,7 +178,7 @@ class DBN:
     def get_model(self):
         	return self.model
 
-    def __init__(self , channel = 3 , lr=0.0001 , patch_size=32 , T_count=7,n0 = 256 , nr=64 ,chk = -1 , scale = 8):
+    def __init__(self , channel = 3 , lr=0.0001 , patch_size=32 , T_count=7,n0 = 256 , nr=64 ,chk = -1 , scale = 3):
             self.channel_axis = 3
             self.patch_size = patch_size
             self.scale = scale
