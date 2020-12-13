@@ -56,15 +56,15 @@ class DATA:
             
             
     def save_data(self):
-            np.save('training_patches_Y.npy'  , self.training_patches_Y )
+            np.save(self.folder+'/'+'training_patches_Y.npy'  , self.training_patches_Y )
             if self.patch_size == 64:
-                np.save('training_patches_2x.npy' , self.training_patches_2x) 
+                np.save(self.folder+'/'+'training_patches_2x.npy' , self.training_patches_2x) 
             elif self.patch_size == 96:
-                np.save('training_patches_3x.npy' , self.training_patches_3x) 
+                np.save(self.folder+'/'+'training_patches_3x.npy' , self.training_patches_3x) 
             elif self.patch_size == 128:
-                np.save('training_patches_4x.npy' , self.training_patches_4x) 
+                np.save(self.folder+'/'+'training_patches_4x.npy' , self.training_patches_4x) 
             elif self.patch_size == 256:
-                np.save('training_patches_8x.npy' , self.training_patches_8x) 
+                np.save(self.folder+'/'+'training_patches_8x.npy' , self.training_patches_8x) 
             #np.save('training_noisy_patches_2x.npy' , self.training_noisy_patches_2x)
             #np.save('training_noisy_patches_4x.npy' , self.training_noisy_patches_4x)
             #np.save('training_noisy_patches_8x.npy' , self.training_noisy_patches_8x)
@@ -151,7 +151,7 @@ class DATA:
 if __name__ == "__main__":
     import time
     s = time.time()
-    d = DATA(folder='training_hr_images') ## Call for constructing the Object. Give the root directory where it can find the
+    d = DATA(folder='training_hr_images', patch_size=96) ## Call for constructing the Object. Give the root directory where it can find the
     # images. It will walk and find everything
     d.construct_list() # only when you need to create everything a new
     print('amount of data:' , d.training_patches_Y.shape)
