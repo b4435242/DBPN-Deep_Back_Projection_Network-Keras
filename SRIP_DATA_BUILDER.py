@@ -69,7 +69,7 @@ class DATA:
             #np.save('training_noisy_patches_4x.npy' , self.training_noisy_patches_4x)
             #np.save('training_noisy_patches_8x.npy' , self.training_noisy_patches_8x)
     
-    def load_data(self , folder=''):
+    def load_data(self , folder=self.folder):
             self.training_patches_Y  = np.load( folder+'/'+'training_patches_Y.npy') 
             if self.patch_size == 64:
                 self.training_patches_2x = np.load( folder+'/'+'training_patches_2x.npy') 
