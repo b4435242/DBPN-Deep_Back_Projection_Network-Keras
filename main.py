@@ -290,6 +290,7 @@ if __name__ == '__main__':
             net.fit(x[samplev] , y[samplev] , batch_size , epochs )
             
             net.get_model().save_weights('model_'+str(scale)+'x_iter'+str(i)+'.h5')
+            net.get_model().save_weights('/content/drive/MyDrive/Colab Notebooks/HW4/checkpoint/model_'+str(scale)+'x_iter'+str(i)+'.h5')
             g = net.get_model().predict(np.array(p))
             gen = DATA.reconstruct(g , r , c , scale=1)
             Image.fromarray(gen).save("test_"+str(scale)+"x_gen_"+str(i)+".png")
@@ -305,6 +306,8 @@ if __name__ == '__main__':
         if not os.path.isdir('results'):
             os.makedirs('results')
         Image.fromarray(gen).save("results/test_"+str(scale)+"x_gen_.png")
+        Image.fromarray(gen).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/test_"+str(scale)+"x_gen_.png")
+
 
         
         if zoom:
