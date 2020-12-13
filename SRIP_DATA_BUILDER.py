@@ -69,16 +69,16 @@ class DATA:
             #np.save('training_noisy_patches_4x.npy' , self.training_noisy_patches_4x)
             #np.save('training_noisy_patches_8x.npy' , self.training_noisy_patches_8x)
     
-    def load_data(self , folder=self.folder):
-            self.training_patches_Y  = np.load( folder+'/'+'training_patches_Y.npy') 
+    def load_data(self):
+            self.training_patches_Y  = np.load(self.folder+'/'+'training_patches_Y.npy') 
             if self.patch_size == 64:
-                self.training_patches_2x = np.load( folder+'/'+'training_patches_2x.npy') 
+                self.training_patches_2x = np.load(self.folder+'/'+'training_patches_2x.npy') 
             elif self.patch_size == 96:
-                self.training_patches_3x = np.load( folder+'/'+'training_patches_3x.npy') 
+                self.training_patches_3x = np.load(self.folder+'/'+'training_patches_3x.npy') 
             elif self.patch_size == 128:
-                self.training_patches_4x = np.load( folder+'/'+'training_patches_4x.npy') 
+                self.training_patches_4x = np.load(self.folder+'/'+'training_patches_4x.npy') 
             elif self.patch_size == 256:
-                self.training_patches_8x = np.load( folder+'/'+'training_patches_8x.npy') 
+                self.training_patches_8x = np.load(self.folder+'/'+'training_patches_8x.npy') 
             # self.training_noisy_patches_2x = np.load( folder+'/'+'training_noisy_patches_2x.npy')
             # self.training_noisy_patches_4x = np.load( folder+'/'+'training_noisy_patches_4x.npy')
             # self.training_noisy_patches_8x = np.load( folder+'/'+'training_noisy_patches_8x.npy')
