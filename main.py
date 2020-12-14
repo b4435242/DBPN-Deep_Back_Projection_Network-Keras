@@ -300,8 +300,8 @@ if __name__ == '__main__':
         g = net.get_model().predict(np.array(p))        
         gen = DATA.reconstruct(g , r , c , scale=1)
         
-        gen = gen[0:-R , 0:-C , :]
-        img = img[0:-R , 0:-C , :]
+        #gen = gen[0:-R , 0:-C , :]
+        #img = img[0:-R , 0:-C , :]
         
         if not os.path.isdir('results'):
             os.makedirs('results')
@@ -314,6 +314,6 @@ if __name__ == '__main__':
            z , r , c = DATA.patchify(img , scale = scale)
            gz = net.get_model().predict(np.array(z))
            genz = DATA.reconstruct(gz , r , c , scale=1)
-           Image.fromarray(gen).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/{}".format(image_name.split('/')[-1]))
+           Image.fromarray(gen).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/zoom_{}".format(image_name.split('/')[-1]))
         
-        print("Reconstruction Gain:", PSNRLossnp( img, gen))
+        #print("Reconstruction Gain:", PSNRLossnp( img, gen))
