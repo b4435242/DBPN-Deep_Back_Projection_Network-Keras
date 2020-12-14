@@ -305,8 +305,8 @@ if __name__ == '__main__':
         
         if not os.path.isdir('results'):
             os.makedirs('results')
-        Image.fromarray(gen).save("results/test_"+str(scale)+"x_gen_.png")
-        Image.fromarray(gen).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/test_"+str(scale)+"x_gen_.png")
+        Image.fromarray(gen).save("results/{}.png".format(image_name.split('/')[-1]))
+        Image.fromarray(gen).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/{}.png".format(image_name.split('/')[-1]))
 
 
         
