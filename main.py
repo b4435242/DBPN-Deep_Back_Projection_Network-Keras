@@ -296,6 +296,8 @@ if __name__ == '__main__':
             Image.fromarray(gen).save("test_"+str(scale)+"x_gen_"+str(i)+".png")
             print("Reconstruction Gain:", PSNRLossnp(img , gen))
     else:
+        img = cv2.imread(image_name)
+        img = cv2.cvtColor(img , cv2.COLOR_BGR2RGB)
         p , r , c = DATA.patchify(img,scale=scale) 
         g = net.get_model().predict(np.array(p))        
         gen = DATA.reconstruct(g , r , c , scale=1)
