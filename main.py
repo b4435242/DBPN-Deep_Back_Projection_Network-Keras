@@ -302,7 +302,7 @@ if __name__ == '__main__':
         g = net.get_model().predict(np.array(p))        
         gen = DATA.reconstruct(g , r , c , scale=1)
         
-        gen = gen[0:-R , 0:-C , :]
+        #gen = gen[0:-R , 0:-C , :]
         #img = img[0:-R , 0:-C , :]
         
         if not os.path.isdir('results'):
