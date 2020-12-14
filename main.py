@@ -301,10 +301,11 @@ if __name__ == '__main__':
         gen = DATA.reconstruct(g , r , c , scale=1)
         
         gen = gen[0:-R , 0:-C , :]
-        #img = img[0:-R , 0:-C , :]
+        img = img[0:-R , 0:-C , :]
         
         if not os.path.isdir('results'):
             os.makedirs('results')
+        Image.fromarray(img).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/patch_{}".format(image_name.split('/')[-1]))
         Image.fromarray(gen).save("results/{}".format(image_name.split('/')[-1]))
         Image.fromarray(gen).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/{}".format(image_name.split('/')[-1]))
 
