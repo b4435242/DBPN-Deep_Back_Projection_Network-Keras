@@ -221,6 +221,7 @@ class DBN:
             #if gpu < 0:
             #   self.model = multi_gpu_model(self.model, gpus=2)
 
+
             adam = Adam(lr=lr, beta_1=0.9, beta_2=0.999, epsilon=None)
             self.model.compile(loss='mse', optimizer=adam , metrics=[PSNRLoss,SSIM])
 
@@ -231,8 +232,10 @@ class DBN:
 
     def fit(self , X , Y ,batch_size=16 , epoch = 1000 ):
             # with tf.device('/gpu:'+str(gpu)):
+            reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.1,
+                              patience=5, min_lr=0.000001)
             zero = np.zeros(Y.shape[0])    
-            hist = self.model.fit(x=X, y=Y, batch_size=batch_size, verbose=1, epochs=epoch)
+            hist = self.model.fit(x=X, y=Y, batch_size=batch_size, verbose=1, epochs=epoch, callbacks=[reduce_lr])
             return hist.history
     
 
