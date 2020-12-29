@@ -80,7 +80,7 @@ from keras.optimizers import Adam
 from keras.callbacks import LearningRateScheduler
 from keras import backend as k
 from keras.applications import vgg16
-from keras.utils import multi_gpu_model
+#from keras.utils import multi_gpu_model
 from keras.applications.imagenet_utils import preprocess_input
 import tensorflow as tf
 from keras.utils import plot_model
