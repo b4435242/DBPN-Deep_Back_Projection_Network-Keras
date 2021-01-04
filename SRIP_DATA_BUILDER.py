@@ -50,7 +50,8 @@ class DATA:
             image[image < 0] = 0
             return np.array(image, np.uint8)
                     
-    def __init__(self , folder = './' , patch_size = 64 ):
+    def __init__(self , imgfolder, folder = './' , patch_size = 64 ):
+            self.imgfolder = imgfolder
             self.folder = folder
             self.patch_size = patch_size
             
@@ -88,7 +89,7 @@ class DATA:
             train_data_list = []
             train_noisy_data_list = []
             i = 1
-            for root , subFolder , files in os.walk(self.folder):
+            for root , subFolder , files in os.walk(self.imgfolder):
                 try:
                     for file in files:
                         if file.split('.')[1] in ('jpg','png','jpeg'):
@@ -151,7 +152,7 @@ class DATA:
 if __name__ == "__main__":
     import time
     s = time.time()
-    d = DATA(folder='../input/hw4imagessss/training_hr_images', patch_size=96) ## Call for constructing the Object. Give the root directory where it can find the
+    d = DATA(imgfolder='../input/hw4imagessss/training_hr_images', patch_size=96) ## Call for constructing the Object. Give the root directory where it can find the
     # images. It will walk and find everything
     d.construct_list() # only when you need to create everything a new
     print('amount of data:' , d.training_patches_Y.shape)
