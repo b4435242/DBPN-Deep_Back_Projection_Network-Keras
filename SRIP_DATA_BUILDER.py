@@ -151,7 +151,7 @@ class DATA:
 if __name__ == "__main__":
     import time
     s = time.time()
-    d = DATA(folder='training_hr_images', patch_size=96) ## Call for constructing the Object. Give the root directory where it can find the
+    d = DATA(folder='../input/hw4imagessss/training_hr_images', patch_size=96) ## Call for constructing the Object. Give the root directory where it can find the
     # images. It will walk and find everything
     d.construct_list() # only when you need to create everything a new
     print('amount of data:' , d.training_patches_Y.shape)
