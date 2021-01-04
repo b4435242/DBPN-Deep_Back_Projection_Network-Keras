@@ -228,7 +228,8 @@ class DBN:
             
             if chk >=0 :
                 print("loading existing weights !!!")
-                self.model.load_weights('/content/drive/MyDrive/Colab Notebooks/HW4/checkpoint/model_'+str(scale)+'x_iter'+str(chk)+'.h5')
+                #self.model.load_weights('/content/drive/MyDrive/Colab Notebooks/HW4/checkpoint/model_'+str(scale)+'x_iter'+str(chk)+'.h5')
+                self.model.load_weights('weights/model_'+str(scale)+'x_iter'+str(chk)+'.h5')
 
     def fit(self , X , Y ,batch_size=16 , epoch = 1000 ):
             # with tf.device('/gpu:'+str(gpu)):
@@ -275,11 +276,11 @@ if __name__ == '__main__':
     R = DATA.patch_size - img.shape[0] % DATA.patch_size
     C = DATA.patch_size - img.shape[1] % DATA.patch_size
     img = np.pad(img, [(0,R),(0,C),(0,0)] , 'constant')
-    Image.fromarray(img).save("test_image_padded.png")
+    #Image.fromarray(img).save("test_image_padded.png")
     lr_img = cv2.resize(img , (int(img.shape[1]/scale),int(img.shape[0]/scale)) ,cv2.INTER_CUBIC)
-    Image.fromarray(lr_img).save("test_"+str(scale)+"x_lr_padded.png")
+    #Image.fromarray(lr_img).save("test_"+str(scale)+"x_lr_padded.png")
     hr_img_bi = cv2.resize(lr_img ,(int(img.shape[1]),int(img.shape[0])),cv2.INTER_CUBIC)
-    Image.fromarray(hr_img_bi).save("test_"+str(scale)+"x_hr_bicubic_padded.png")
+    #Image.fromarray(hr_img_bi).save("test_"+str(scale)+"x_hr_bicubic_padded.png")
 
 
     p , r , c = DATA.patchify(lr_img,scale=scale) 
@@ -292,11 +293,13 @@ if __name__ == '__main__':
            
             net.fit(x[samplev] , y[samplev] , batch_size , epochs )
             
-            net.get_model().save_weights('model_'+str(scale)+'x_iter'+str(i)+'.h5')
-            net.get_model().save_weights('/content/drive/MyDrive/Colab Notebooks/HW4/checkpoint/model_'+str(scale)+'x_iter'+str(i)+'.h5')
+            if not os.path.isdir('weights'):
+                os.makedirs('weights')
+            net.get_model().save_weights('weights/model_'+str(scale)+'x_iter'+str(i)+'.h5')
+            #net.get_model().save_weights('/content/drive/MyDrive/Colab Notebooks/HW4/checkpoint/model_'+str(scale)+'x_iter'+str(i)+'.h5')
             g = net.get_model().predict(np.array(p))
             gen = DATA.reconstruct(g , r , c , scale=1)
-            Image.fromarray(gen).save("test_"+str(scale)+"x_gen_"+str(i)+".png")
+            #Image.fromarray(gen).save("test_"+str(scale)+"x_gen_"+str(i)+".png")
             print("Reconstruction Gain:", PSNRLossnp(img , gen))
     else:
         p , r , c = DATA.patchify(img,scale=scale) 
@@ -308,9 +311,9 @@ if __name__ == '__main__':
         
         if not os.path.isdir('results'):
             os.makedirs('results')
-        Image.fromarray(img).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/patch_{}".format(image_name.split('/')[-1]))
+        #Image.fromarray(img).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/patch_{}".format(image_name.split('/')[-1]))
         Image.fromarray(gen).save("results/{}".format(image_name.split('/')[-1]))
-        Image.fromarray(gen).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/{}".format(image_name.split('/')[-1]))
+        #Image.fromarray(gen).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/{}".format(image_name.split('/')[-1]))
 
 
         
@@ -318,6 +321,6 @@ if __name__ == '__main__':
            z , r , c = DATA.patchify(img , scale = scale)
            gz = net.get_model().predict(np.array(z))
            genz = DATA.reconstruct(gz , r , c , scale=1)
-           Image.fromarray(gen).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/zoom_{}".format(image_name.split('/')[-1]))
+           #Image.fromarray(gen).save("/content/drive/MyDrive/Colab Notebooks/HW4/results/zoom_{}".format(image_name.split('/')[-1]))
         
         #print("Reconstruction Gain:", PSNRLossnp( img, gen))
