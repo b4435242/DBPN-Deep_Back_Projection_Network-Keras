@@ -229,7 +229,10 @@ class DBN:
             if chk >=0 :
                 print("loading existing weights !!!")
                 #self.model.load_weights('/content/drive/MyDrive/Colab Notebooks/HW4/checkpoint/model_'+str(scale)+'x_iter'+str(chk)+'.h5')
-                self.model.load_weights('weights/model_'+str(scale)+'x_iter'+str(chk)+'.h5')
+                if os.path.isfile('../input/weights-input/'+str(scale)+'x_iter'+str(chk)+'.h5'):
+                    self.model.load_weights('../input/weights-input/model_'+str(scale)+'x_iter'+str(chk)+'.h5')
+                else:
+                    self.model.load_weights('weights/model_'+str(scale)+'x_iter'+str(chk)+'.h5')
 
     def fit(self , X , Y ,batch_size=16 , epoch = 1000 ):
             # with tf.device('/gpu:'+str(gpu)):
